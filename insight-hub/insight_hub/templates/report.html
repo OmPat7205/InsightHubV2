@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ context.title }} - {{ context.date }}</title>
+    <style>
+        /* Base Reset */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fdfdfd;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header */
+        header {
+            border-bottom: 2px solid #efefef;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: right;
+        }
+
+        /* Severity Badges */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .badge.red {
+            background: #ffebeb;
+            color: #c00;
+        }
+
+        .badge.yellow {
+            background: #fffbe6;
+            color: #b7950b;
+        }
+
+        .badge.green {
+            background: #e6ffed;
+            color: #00802b;
+        }
+
+        /* Sections */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            color: #444;
+        }
+
+        /* Executive Summary */
+        .exec-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #222;
+            margin-bottom: 30px;
+        }
+
+        .exec-summary ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .exec-summary li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        /* Risk Signal */
+        .risk-signal {
+            display: inline-block;
+            padding: 8px 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        /* Action Cards */
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: top;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .implication {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Next Steps Table */
+        .next-steps {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .next-steps th,
+        .next-steps td {
+            padding: 8px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .next-steps th {
+            width: 30%;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Signals */
+        .signals ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .signals li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .signals li:before {
+            content: "►";
+            color: #0066cc;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            font-size: 0.75rem;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand">
+                {% if context.logo_src %}
+                <img src="{{ context.logo_src }}" alt="Insight Hub" style="height: 50px;">
+                {% else %}
+                Insight Hub
+                {% endif %}
+            </div>
+            <div class="meta">
+                {{ context.date }}<br>
+                {{ context.sector_name }}
+            </div>
+        </header>
+
+        <h1>Daily Intelligence Brief</h1>
+
+        <!-- Risk Level -->
+        <div class="risk-signal 
+            {% if 'RED' in context.risk_level %}badge red
+            {% elif 'YELLOW' in context.risk_level %}badge yellow
+            {% else %}badge green{% endif %}">
+            Risk: {{ context.risk_level }}
+        </div>
+
+        <div class="exec-summary">
+            <h3>Executive Judgment</h3>
+            <ul>
+                {% for point in context.executive_summary %}
+                <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <h2>Priority Action Items</h2>
+        {% for card in context.action_cards %}
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">{{ card.title }}</div>
+                <span class="badge 
+                    {% if card.severity == 'High' %}red
+                    {% elif card.severity == 'Medium' %}yellow
+                    {% else %}green{% endif %}">
+                    {{ card.severity }}
+                </span>
+            </div>
+            <div class="implication">Implication: {{ card.implication }}</div>
+
+            <table class="next-steps">
+                {% for role, steps in card.next_steps.items() %}
+                <tr>
+                    <th>{{ role }}</th>
+                    <td>
+                        {% for step in steps %}
+                        <div>• {{ step }}</div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endfor %}
+
+        <h2>Signals to Watch</h2>
+        <div class="signals">
+            <ul>
+                {% for signal in context.forward_looking_signals %}
+                <li>{{ signal }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <h2>Deep Dive Sources</h2>
+        <div class="sources" style="font-size: 0.85rem; color: #555;">
+            <ul>
+                {% for source in context.sources %}
+                <li>
+                    <a href="{{ source.link }}" target="_blank" style="color: #0066cc; text-decoration: none;">{{
+                        source.title }}</a>
+                    <span style="color: #999;">({{ source.source }})</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <footer>
+            Generated by Insight Hub Engine v2.0 • Insight Hub can make mistakes. Check important info. • For Internal
+            Use Only
+        </footer>
+    </div>
+
+</body>
+
+</html>
