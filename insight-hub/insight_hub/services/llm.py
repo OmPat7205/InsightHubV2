@@ -5,7 +5,10 @@ from typing import List, Dict, Any
 from dotenv import load_dotenv
 
 # Load for local dev
-load_dotenv("insight-hub/.env")
+from dotenv import load_dotenv, find_dotenv
+
+# Load for local dev
+load_dotenv(find_dotenv())
 
 # Initialize Groq
 # Prioritize GROQ_API_KEY, fallback to env var for local dev
