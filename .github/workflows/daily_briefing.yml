@@ -42,4 +42,4 @@ jobs:
         git config --global user.email 'bot@insighthub.ai'
         git add output/
         # Only commit if there are changes
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Daily Intelligence Update [$(date)]" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Daily Intelligence Update [$(date)]" && git push origin HEAD:main)
