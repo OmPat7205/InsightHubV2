@@ -22,6 +22,10 @@ class Healthcare(Sector):
             "https://www.healthcareitnews.com/home/feed",
             "https://www.cms.gov/newsroom/rss-feed",
             "https://oig.hhs.gov/rss/reports.xml",
+            "https://www.statnews.com/feed/",
+            "https://medcitynews.com/feed/",
+            "https://www.healthaffairs.org/rss/news",
+            "https://www.fda.gov/about-fda/contact-fda/stay-connected/rss-feeds/drug-safety-podcasts/rss.xml"
         ]
 
     @property
@@ -29,7 +33,9 @@ class Healthcare(Sector):
         return [
             "cms", "hhs", "hipaa", "reimbursement", "hospital", "clinic", "payer",
             "provider", "medicare", "medicaid", "staffing", "labor", "compliance",
-            "healthcare", "ehr", "patient data"
+            "healthcare", "ehr", "patient data", "digital health", "telehealth", 
+            "ai in healthcare", "cybersecurity", "ransomware", "drug approval", "fda", 
+            "biotech", "pharma", "clinical trial", "value-based care"
         ]
 
     @property

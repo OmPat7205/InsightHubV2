@@ -23,6 +23,10 @@ class FinancialServices(Sector):
             "https://www.consumerfinance.gov/about-us/blog/feed/",
             "https://www.occ.treas.gov/rss/occ-news.xml",
             "https://www.ft.com/?format=rss",
+            "https://www.cnbc.com/id/10000664/device/rss/rss.html", # Finance
+            "https://feeds.bloomberg.com/markets/news.rss",
+            "https://www.wsj.com/xml/rss/3_7031.xml", # Markets
+            "https://cointelegraph.com/rss"
         ]
 
     @property
@@ -30,7 +34,9 @@ class FinancialServices(Sector):
         return [
             "sec", "fed", "occ", "cfpb", "enforcement", "settlement", "fine",
             "bank", "liquidity", "capital", "stress test", "regulation",
-            "fintech", "payment", "fraud", "compliance", "risk"
+            "fintech", "payment", "fraud", "compliance", "risk",
+            "interest rate", "inflation", "cpi", "fomc", "crypto regulation",
+            "stablecoin", "cbdc", "basel iii", "dodd-frank", "anti-money laundering", "aml", "kyc"
         ]
 
     @property

@@ -25,6 +25,11 @@ class Cybersecurity(Sector):
             "https://www.darkreading.com/rss.xml",
             "https://www.securityweek.com/feed/",
             "https://feeds.feedburner.com/TheHackersNews",
+            "https://threatpost.com/feed/",
+            "https://cisoseries.com/feed/",
+            "https://unit42.paloaltonetworks.com/feed/",
+            "https://www.microsoft.com/security/blog/feed/",
+            "https://googleprojectzero.blogspot.com/feeds/posts/default"
         ]
 
     @property
@@ -34,7 +39,8 @@ class Cybersecurity(Sector):
             "phishing", "zero-day", "patch", "botnet", "ddos", "cisa", "incident",
             "threat", "intrusion", "data leak", "supply chain", "api security",
             "cloud security", "identity", "mfa", "authentication", "apt", "nation-state",
-            "ai", "llm", "injection"
+            "ai", "llm", "injection", "social engineering", "insider threat", "zero trust",
+            "nist", "compliance", "gdpr", "ccpa", "dark web", "yara", "tTPs"
         ]
 
     @property

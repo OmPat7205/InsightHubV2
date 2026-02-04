@@ -40,6 +40,11 @@ def analyze_sector(sector, items: List[Dict]) -> Dict[str, Any]:
     
     Goal: Produce a Daily Intelligence Brief JSON.
     
+    CRITICAL: You must strictly adhere to these severity definitions:
+    - HIGH: Immediate, critical threat to operations, finance, or reputation. Requires urgent C-level intervention. (e.g., Zero-day exploit, new regulation with immediate impact, major competitor move).
+    - MEDIUM: Significant trend or risk that requires strategy adjustment or monitoring. (e.g., New tool release, emerging policy discussion, moderate market shift).
+    - LOW: Informational, emerging trend, or minor update. (e.g., educational content, minor version update, opinion piece).
+
     Structure:
     {{
         "executive_summary": ["Bullet 1", "Bullet 2", "Bullet 3"],
@@ -48,10 +53,10 @@ def analyze_sector(sector, items: List[Dict]) -> Dict[str, Any]:
             {{
                 "title": "Short Title",
                 "severity": "High/Medium/Low",
-                "implication": "Business impact",
+                "implication": "Business impact (Why this matters)",
                 "next_steps": {{
-                    "Role1": ["Step 1"],
-                    "Role2": ["Step 1"]
+                    "Role1": ["Specific actionable step"],
+                    "Role2": ["Specific actionable step"]
                 }}
             }}
         ],
@@ -59,7 +64,7 @@ def analyze_sector(sector, items: List[Dict]) -> Dict[str, Any]:
     }}
     
     Roles to use in next_steps: {', '.join(sector.roles)}
-    Output JSON ONLY. No markdown.
+    Output JSON ONLY. No markdown or code fences.
     """
 
     user_prompt = f"Analyze these articles:\n{articles_text}"
