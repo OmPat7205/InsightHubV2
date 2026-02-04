@@ -5,7 +5,7 @@ class Newsletter(Sector):
 
     @property
     def name(self) -> str:
-        return "AI & Tech Newsletter"
+        return "AI Daily Briefing"
 
     @property
     def key(self) -> str:
