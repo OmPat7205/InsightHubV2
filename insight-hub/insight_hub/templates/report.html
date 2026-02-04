@@ -233,8 +233,8 @@
             <div class="card-header">
                 <div class="card-title">{{ card.title }}</div>
                 <span class="badge 
-                    {% if card.severity == 'High' %}red
-                    {% elif card.severity == 'Medium' %}yellow
+                    {% if card.severity|upper == 'HIGH' %}red
+                    {% elif card.severity|upper == 'MEDIUM' %}yellow
                     {% else %}green{% endif %}">
                     {{ card.severity }}
                 </span>
