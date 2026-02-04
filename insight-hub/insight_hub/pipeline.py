@@ -53,6 +53,14 @@ def run_sector(sector_key: str):
             b64_str = base64.b64encode(img_f.read()).decode("utf-8")
             logo_src = f"data:image/png;base64,{b64_str}"
 
+    # Sort Action Cards by Priority (High > Medium > Low)
+    severity_order = {"High": 0, "Medium": 1, "Low": 2, "HIGH": 0, "MEDIUM": 1, "LOW": 2}
+    
+    if "action_cards" in analysis_result and isinstance(analysis_result["action_cards"], list):
+        analysis_result["action_cards"].sort(
+            key=lambda x: severity_order.get(x.get("severity", "Low"), 3)
+        )
+
     # 4. Merge Data for Rendering
     report_data = {
         "title": sector.name,
