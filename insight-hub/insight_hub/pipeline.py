@@ -66,7 +66,7 @@ def run_sector(sector_key: str):
         "title": sector.name,
         "date": now_dt.strftime("%B %d, %Y"),
         "generated_at": now_dt.isoformat(),
-        "sector_name": sector.key.replace("_", " ").title(),
+        "sector_name": sector.name,  # Use full display name (e.g. "AI Daily Briefing")
         "logo_src": logo_src,
         **analysis_result,  # Unloads executive_summary, risk_level, action_cards
         "sources": [{"title": item["title"], "link": item["link"], "source": item["source"]} for item in selected_items]

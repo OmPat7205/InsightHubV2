@@ -13,7 +13,14 @@ def parse_filename(filename):
     # Regex to capture sector and date
     match = re.match(r"InsightHub_(.+)_(\d{4}-\d{2}-\d{2})\.html", filename)
     if match:
-        raw_sector = match.group(1).replace("_", " ").title()
+        raw_sector_key = match.group(1).replace("_", " ").title()
+        
+        # Mapping for display names
+        sector_map = {
+            "Newsletter": "AI"
+        }
+        raw_sector = sector_map.get(raw_sector_key, raw_sector_key)
+        
         date_str = match.group(2)
         # Convert date to nicer format
         dt = datetime.strptime(date_str, "%Y-%m-%d")
