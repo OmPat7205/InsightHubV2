@@ -394,6 +394,22 @@
             border-radius: 50%;
         }
 
+        /* History Grouping */
+        .history-group {
+            margin-bottom: 25px;
+        }
+
+        .h-group-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            padding-left: 12px;
+            border-left: 3px solid var(--accent-purple);
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -523,25 +539,29 @@
                 </div>
 
                 {% for sector, reports in sectors.items() %}
-                {% for report in reports %}
-                {% if loop.index > 1 %}
-                <a href="{{ report.filename }}" style="text-decoration: none; color: inherit;">
-                    <div class="history-item">
-                        <div class="h-icon">
-                            <i data-lucide="file"></i>
+                {% if reports|length > 1 %}
+                <div class="history-group">
+                    <div class="h-group-title">{{ sector }}</div>
+                    {% for report in reports %}
+                    {% if loop.index > 1 %}
+                    <a href="{{ report.filename }}" style="text-decoration: none; color: inherit;">
+                        <div class="history-item">
+                            <div class="h-icon">
+                                <i data-lucide="file"></i>
+                            </div>
+                            <div class="h-info">
+                                <div class="h-date">{{ report.date_str }}</div>
+                            </div>
+                            <div class="h-status">
+                                <div class="dot"></div>
+                                Ready
+                            </div>
                         </div>
-                        <div class="h-info">
-                            <div class="h-title">{{ sector }}</div>
-                            <div class="h-date">{{ report.date_str }}</div>
-                        </div>
-                        <div class="h-status">
-                            <div class="dot"></div>
-                            Ready
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
                 {% endif %}
-                {% endfor %}
                 {% endfor %}
 
             </div>
