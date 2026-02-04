@@ -210,31 +210,167 @@
 
         <!-- Risk Level -->
         <div class="risk-signal 
-            badge green">
-            Risk: GREEN (Low)
+            badge red
+            ">
+            Risk: RED (High)
         </div>
 
         <div class="exec-summary">
             <h3>Executive Judgment</h3>
             <ul>
                 
-                <li>No API Key provided.</li>
+                <li>Multiple critical vulnerabilities have been exploited in the wild, including SolarWinds, React Native, and Microsoft Office flaws</li>
                 
-                <li>Please set GROQ_API_KEY.</li>
+                <li>Russian hackers have been attributed to attacks exploiting a recently patched Microsoft Office bug</li>
                 
-                <li>Using fallback mode.</li>
+                <li>AI-assisted attacks are becoming more prevalent, with a recent breach of an AWS environment achieved in just 8 minutes</li>
+                
+                <li>Cloud outages are causing significant disruptions to organizations, highlighting the need for robust disaster recovery plans</li>
                 
             </ul>
         </div>
 
         <h2>Priority Action Items</h2>
         
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Patch Critical Vulnerabilities</div>
+                <span class="badge 
+                    red
+                    ">
+                    High
+                </span>
+            </div>
+            <div class="implication">Implication: Unpatched vulnerabilities can lead to significant breaches and data loss</div>
+
+            <table class="next-steps">
+                
+                <tr>
+                    <th>IT Ops</th>
+                    <td>
+                        
+                        <div>• Apply patches to SolarWinds, React Native, and Microsoft Office systems immediately</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>SecOps</th>
+                    <td>
+                        
+                        <div>• Monitor for suspicious activity related to exploited vulnerabilities</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>GRC/Legal</th>
+                    <td>
+                        
+                        <div>• Review incident response plans and ensure compliance with relevant regulations</div>
+                        
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Implement AI-Assisted Attack Detection</div>
+                <span class="badge 
+                    yellow
+                    ">
+                    Medium
+                </span>
+            </div>
+            <div class="implication">Implication: AI-assisted attacks can bypass traditional security controls, requiring advanced detection capabilities</div>
+
+            <table class="next-steps">
+                
+                <tr>
+                    <th>IT Ops</th>
+                    <td>
+                        
+                        <div>• Implement AI-powered security tools to detect and respond to AI-assisted attacks</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>SecOps</th>
+                    <td>
+                        
+                        <div>• Develop incident response plans for AI-assisted attacks</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>GRC/Legal</th>
+                    <td>
+                        
+                        <div>• Review and update security policies to address AI-assisted attack risks</div>
+                        
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Develop Cloud Outage Response Plans</div>
+                <span class="badge 
+                    yellow
+                    ">
+                    Medium
+                </span>
+            </div>
+            <div class="implication">Implication: Cloud outages can have significant business impacts, requiring robust response plans</div>
+
+            <table class="next-steps">
+                
+                <tr>
+                    <th>IT Ops</th>
+                    <td>
+                        
+                        <div>• Develop and test cloud outage response plans</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>SecOps</th>
+                    <td>
+                        
+                        <div>• Identify critical cloud-based systems and develop backup plans</div>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>GRC/Legal</th>
+                    <td>
+                        
+                        <div>• Review and update business continuity plans to address cloud outage risks</div>
+                        
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
 
         <h2>Signals to Watch</h2>
         <div class="signals">
             <ul>
                 
-                <li>Configure API key to see signals.</li>
+                <li>Increased exploitation of AI-related vulnerabilities</li>
+                
+                <li>Growing use of AI-assisted attacks by threat actors</li>
+                
+                <li>More frequent and severe cloud outages due to increased reliance on cloud services</li>
                 
             </ul>
         </div>
