@@ -326,7 +326,10 @@
             border: 1px solid var(--border-color);
             border-radius: 28px;
             padding: 25px;
-            height: fit-content;
+            /* Limit height and scroll */
+            max-height: 600px;
+            display: flex;
+            flex-direction: column;
         }
 
         .history-item {
@@ -612,6 +615,12 @@
                         margin-bottom: 20px;
                         flex-wrap: wrap;
                         gap: 10px;
+                        flex-shrink: 0;
+                    }
+
+                    #archiveContainer {
+                        overflow-y: auto;
+                        padding-right: 5px;
                     }
 
                     .archive-controls {
@@ -628,7 +637,7 @@
                         font-family: inherit;
                         font-size: 0.9rem;
                         outline: none;
-                        width: 200px;
+                        width: 180px;
                         transition: border-color 0.2s;
                     }
 
@@ -639,34 +648,44 @@
                     .date-filter {
                         background: var(--bg-body);
                         border: 1px solid var(--border-color);
-                        padding: 8px;
+                        padding: 7px 10px;
                         border-radius: 8px;
                         color: white;
                         font-family: inherit;
                         cursor: pointer;
                         outline: none;
+                        color-scheme: dark;
+                        /* Dark mode calendar */
                     }
 
-                    .history-group-month {
-                        margin-bottom: 30px;
+                    .date-filter:focus {
+                        border-color: var(--accent-purple);
+                    }
+
+                    .history-group-sector {
+                        margin-bottom: 25px;
                         animation: fadeIn 0.5s ease-out;
                     }
 
-                    .month-header {
+                    .sector-header {
                         font-size: 0.85rem;
                         font-weight: 700;
                         color: var(--text-secondary);
                         text-transform: uppercase;
                         letter-spacing: 1px;
-                        margin-bottom: 15px;
+                        margin-bottom: 12px;
                         padding-bottom: 5px;
                         border-bottom: 1px solid var(--border-color);
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        position: sticky;
+                        top: 0;
+                        background: var(--bg-card);
+                        z-index: 10;
                     }
 
-                    .month-count {
+                    .sector-count {
                         font-size: 0.75rem;
                         background: var(--bg-body);
                         padding: 2px 8px;
@@ -678,8 +697,8 @@
                         background: rgba(255, 255, 255, 0.02);
                         border: 1px solid transparent;
                         border-radius: 16px;
-                        padding: 16px;
-                        margin-bottom: 10px;
+                        padding: 14px;
+                        margin-bottom: 8px;
                         display: flex;
                         align-items: center;
                         gap: 15px;
@@ -695,8 +714,8 @@
                     }
 
                     .ac-icon {
-                        width: 40px;
-                        height: 40px;
+                        width: 36px;
+                        height: 36px;
                         border-radius: 10px;
                         background: var(--bg-body);
                         display: flex;
@@ -710,16 +729,16 @@
                         flex: 1;
                         display: flex;
                         flex-direction: column;
-                        gap: 4px;
+                        gap: 2px;
                     }
 
                     .ac-title {
                         font-weight: 600;
-                        font-size: 0.95rem;
+                        font-size: 0.9rem;
                     }
 
                     .ac-meta {
-                        font-size: 0.8rem;
+                        font-size: 0.75rem;
                         color: var(--text-secondary);
                         display: flex;
                         align-items: center;
@@ -748,8 +767,8 @@
                 <div class="archive-header">
                     <div class="section-title">Archive</div>
                     <div class="archive-controls">
-                        <input type="text" id="archiveSearch" class="search-box" placeholder="Search reports...">
-                        <!-- <input type="month" id="archiveMonth" class="date-filter"> -->
+                        <input type="text" id="archiveSearch" class="search-box" placeholder="Search...">
+                        <input type="date" id="archiveDate" class="date-filter">
                     </div>
                 </div>
 
@@ -760,83 +779,106 @@
 
             <script>
                 // Safely parse the JSON data from Jinja2
-                const allReports = JSON.parse('[{"sector": "Transportation", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_transportation_2026-02-08.html"}, {"sector": "Financial Services", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_financial_services_2026-02-08.html"}, {"sector": "AI", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_newsletter_2026-02-08.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_cybersecurity_2026-02-08.html"}, {"sector": "Healthcare", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_healthcare_2026-02-08.html"}, {"sector": "Transportation", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_transportation_2026-02-07.html"}, {"sector": "Financial Services", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_financial_services_2026-02-07.html"}, {"sector": "AI", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_newsletter_2026-02-07.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_cybersecurity_2026-02-07.html"}, {"sector": "Healthcare", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_healthcare_2026-02-07.html"}, {"sector": "Transportation", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_transportation_2026-02-06.html"}, {"sector": "Financial Services", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_financial_services_2026-02-06.html"}, {"sector": "AI", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_newsletter_2026-02-06.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_cybersecurity_2026-02-06.html"}, {"sector": "Healthcare", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_healthcare_2026-02-06.html"}, {"sector": "Transportation", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_transportation_2026-02-05.html"}, {"sector": "Financial Services", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_financial_services_2026-02-05.html"}, {"sector": "AI", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_newsletter_2026-02-05.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_cybersecurity_2026-02-05.html"}, {"sector": "Healthcare", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_healthcare_2026-02-05.html"}, {"sector": "Transportation", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_transportation_2026-02-04.html"}, {"sector": "Financial Services", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_financial_services_2026-02-04.html"}, {"sector": "AI", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_newsletter_2026-02-04.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_cybersecurity_2026-02-04.html"}, {"sector": "Healthcare", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_healthcare_2026-02-04.html"}, {"sector": "Transportation", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_transportation_2026-02-03.html"}, {"sector": "Financial Services", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_financial_services_2026-02-03.html"}, {"sector": "AI", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_newsletter_2026-02-03.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_cybersecurity_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_healthcare_2026-02-03.html"}, {"sector": "Transportation", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_transportation_2026-02-02.html"}, {"sector": "Financial Services", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_financial_services_2026-02-02.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_cybersecurity_2026-02-02.html"}, {"sector": "Healthcare", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_healthcare_2026-02-02.html"}]');
+                try {
+                    const allReports = JSON.parse('[{"sector": "AI", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_newsletter_2026-02-08.html"}, {"sector": "Healthcare", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_healthcare_2026-02-08.html"}, {"sector": "Transportation", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_transportation_2026-02-08.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_cybersecurity_2026-02-08.html"}, {"sector": "Financial Services", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_financial_services_2026-02-08.html"}, {"sector": "AI", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_newsletter_2026-02-07.html"}, {"sector": "Healthcare", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_healthcare_2026-02-07.html"}, {"sector": "Transportation", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_transportation_2026-02-07.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_cybersecurity_2026-02-07.html"}, {"sector": "Financial Services", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_financial_services_2026-02-07.html"}, {"sector": "AI", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_newsletter_2026-02-06.html"}, {"sector": "Healthcare", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_healthcare_2026-02-06.html"}, {"sector": "Transportation", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_transportation_2026-02-06.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_cybersecurity_2026-02-06.html"}, {"sector": "Financial Services", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_financial_services_2026-02-06.html"}, {"sector": "AI", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_newsletter_2026-02-05.html"}, {"sector": "Healthcare", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_healthcare_2026-02-05.html"}, {"sector": "Transportation", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_transportation_2026-02-05.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_cybersecurity_2026-02-05.html"}, {"sector": "Financial Services", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_financial_services_2026-02-05.html"}, {"sector": "AI", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_newsletter_2026-02-04.html"}, {"sector": "Healthcare", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_healthcare_2026-02-04.html"}, {"sector": "Transportation", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_transportation_2026-02-04.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_cybersecurity_2026-02-04.html"}, {"sector": "Financial Services", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_financial_services_2026-02-04.html"}, {"sector": "AI", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_newsletter_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_healthcare_2026-02-03.html"}, {"sector": "Transportation", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_transportation_2026-02-03.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_cybersecurity_2026-02-03.html"}, {"sector": "Financial Services", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_financial_services_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_healthcare_2026-02-02.html"}, {"sector": "Transportation", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_transportation_2026-02-02.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_cybersecurity_2026-02-02.html"}, {"sector": "Financial Services", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_financial_services_2026-02-02.html"}]');
 
-                const archiveContainer = document.getElementById('archiveContainer');
-                const searchInput = document.getElementById('archiveSearch');
+                    const archiveContainer = document.getElementById('archiveContainer');
+                    const searchInput = document.getElementById('archiveSearch');
+                    const dateInput = document.getElementById('archiveDate');
 
-                // Render Reports Function
-                function renderReports(reports) {
-                    archiveContainer.innerHTML = '';
+                    // Render Reports Function
+                    function renderReports(reports) {
+                        archiveContainer.innerHTML = '';
 
-                    if (reports.length === 0) {
-                        archiveContainer.innerHTML = '<div class="empty-state">No reports found matching your criteria.</div>';
-                        return;
-                    }
+                        if (reports.length === 0) {
+                            archiveContainer.innerHTML = '<div class="empty-state">No reports found matching your criteria.</div>';
+                            return;
+                        }
 
-                    // Group by Month
-                    const groups = {};
-                    reports.forEach(report => {
-                        const date = new Date(report.date_obj);
-                        const monthKey = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-                        if (!groups[monthKey]) groups[monthKey] = [];
-                        groups[monthKey].push(report);
-                    });
-
-                    // Render Groups
-                    for (const [month, groupReports] of Object.entries(groups)) {
-                        const groupDiv = document.createElement('div');
-                        groupDiv.className = 'history-group-month';
-
-                        let cardsHtml = '';
-                        groupReports.forEach(r => {
-                            cardsHtml += `
-                                <a href="${r.filename}" class="archive-card">
-                                    <div class="ac-icon">
-                                        <i data-lucide="file-text" size="18"></i>
-                                    </div>
-                                    <div class="ac-content">
-                                        <div class="ac-title">${r.sector} Briefing</div>
-                                        <div class="ac-meta">
-                                            <span>${new Date(r.date_obj).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' })}</span>
-                                        </div>
-                                    </div>
-                                    <div class="ac-arrow">
-                                        <i data-lucide="arrow-right" size="16"></i>
-                                    </div>
-                                </a>
-                            `;
+                        // Group by Sector
+                        const groups = {};
+                        reports.forEach(report => {
+                            const key = report.sector;
+                            if (!groups[key]) groups[key] = [];
+                            groups[key].push(report);
                         });
 
-                        groupDiv.innerHTML = `
-                            <div class="month-header">
-                                ${month}
-                                <span class="month-count">${groupReports.length}</span>
-                            </div>
-                            <div class="group-content">
-                                ${cardsHtml}
-                            </div>
-                        `;
-                        archiveContainer.appendChild(groupDiv);
+                        // Sort sectors alphabetically
+                        const sortedKeys = Object.keys(groups).sort();
+
+                        // Render Groups
+                        sortedKeys.forEach(sector => {
+                            const groupReports = groups[sector];
+                            const groupDiv = document.createElement('div');
+                            groupDiv.className = 'history-group-sector';
+
+                            let cardsHtml = '';
+                            groupReports.forEach(r => {
+                                cardsHtml += `
+                                    <a href="${r.filename}" class="archive-card">
+                                        <div class="ac-icon">
+                                            <i data-lucide="file-text" size="16"></i>
+                                        </div>
+                                        <div class="ac-content">
+                                            <div class="ac-title">${r.sector} Briefing</div>
+                                            <div class="ac-meta">
+                                                <span>${new Date(r.date_obj).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                                            </div>
+                                        </div>
+                                        <div class="ac-arrow">
+                                            <i data-lucide="arrow-right" size="16"></i>
+                                        </div>
+                                    </a>
+                                `;
+                            });
+
+                            groupDiv.innerHTML = `
+                                <div class="sector-header">
+                                    ${sector}
+                                    <span class="sector-count">${groupReports.length}</span>
+                                </div>
+                                <div class="group-content">
+                                    ${cardsHtml}
+                                </div>
+                            `;
+                            archiveContainer.appendChild(groupDiv);
+                        });
+
+                        // Re-init icons for new content
+                        lucide.createIcons();
                     }
 
-                    // Re-init icons for new content
-                    lucide.createIcons();
+                    // Initial Render
+                    renderReports(allReports);
+
+                    // Filter Logic
+                    function filterReports() {
+                        const term = searchInput.value.toLowerCase();
+                        const dateVal = dateInput.value; // YYYY-MM-DD
+
+                        const filtered = allReports.filter(r => {
+                            const matchesText = r.sector.toLowerCase().includes(term) || r.date_str.toLowerCase().includes(term);
+                            let matchesDate = true;
+
+                            if (dateVal) {
+                                // r.date_obj is ISO string "YYYY-MM-DDTHH:MM:SS"
+                                // We just want YYYY-MM-DD
+                                const reportDate = r.date_obj.split('T')[0];
+                                matchesDate = reportDate === dateVal;
+                            }
+
+                            return matchesText && matchesDate;
+                        });
+
+                        renderReports(filtered);
+                    }
+
+                    searchInput.addEventListener('input', filterReports);
+                    dateInput.addEventListener('change', filterReports);
+
+                } catch (e) {
+                    console.error("Error initializing archive:", e);
                 }
-
-                // Initial Render
-                renderReports(allReports);
-
-                // Filter Logic
-                searchInput.addEventListener('input', (e) => {
-                    const term = e.target.value.toLowerCase();
-                    const filtered = allReports.filter(r =>
-                        r.sector.toLowerCase().includes(term) ||
-                        r.date_str.toLowerCase().includes(term)
-                    );
-                    renderReports(filtered);
-                });
-
             </script>
         </div>
 
