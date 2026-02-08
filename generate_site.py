@@ -60,6 +60,23 @@ def generate_site():
     # 4. Sort Sectors Alphabetically
     sorted_sectors = dict(sorted(sectors.items()))
 
+    # 4.5 Aggregate all reports for JSON
+    all_reports = []
+    for sector_reports in sectors.values():
+        all_reports.extend(sector_reports)
+    
+    # Sort all reports by date
+    all_reports.sort(key=lambda x: x["date_obj"], reverse=True)
+
+    # JSON Serializer for datetime
+    import json
+    def json_serial(obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        raise TypeError (f"Type {type(obj)} not serializable")
+
+    all_reports_json = json.dumps(all_reports, default=json_serial)
+
     # 5. Load Logo
     logo_src = ""
     if os.path.exists(LOGO_PATH):
@@ -74,6 +91,7 @@ def generate_site():
     
     html_out = template.render(
         sectors=sorted_sectors,
+        all_reports_json=all_reports_json,
         logo_src=logo_src
     )
 

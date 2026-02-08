@@ -233,6 +233,7 @@
         .stat-card.purple .stat-value {
             background: linear-gradient(to right, #a78bfa, #c084fc);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -602,551 +603,241 @@
         <!-- Column 3: History List -->
         <div class="col-history">
             <div class="history-list">
-                <div class="section-header" style="margin-bottom: 20px;">
+                <style>
+                    /* Archive specific styles */
+                    .archive-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                    }
+
+                    .archive-controls {
+                        display: flex;
+                        gap: 10px;
+                    }
+
+                    .search-box {
+                        background: var(--bg-body);
+                        border: 1px solid var(--border-color);
+                        padding: 8px 12px;
+                        border-radius: 8px;
+                        color: white;
+                        font-family: inherit;
+                        font-size: 0.9rem;
+                        outline: none;
+                        width: 200px;
+                        transition: border-color 0.2s;
+                    }
+
+                    .search-box:focus {
+                        border-color: var(--accent-purple);
+                    }
+
+                    .date-filter {
+                        background: var(--bg-body);
+                        border: 1px solid var(--border-color);
+                        padding: 8px;
+                        border-radius: 8px;
+                        color: white;
+                        font-family: inherit;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    .history-group-month {
+                        margin-bottom: 30px;
+                        animation: fadeIn 0.5s ease-out;
+                    }
+
+                    .month-header {
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        margin-bottom: 15px;
+                        padding-bottom: 5px;
+                        border-bottom: 1px solid var(--border-color);
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .month-count {
+                        font-size: 0.75rem;
+                        background: var(--bg-body);
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                        color: var(--text-secondary);
+                    }
+
+                    .archive-card {
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid transparent;
+                        border-radius: 16px;
+                        padding: 16px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        transition: all 0.2s ease;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+
+                    .archive-card:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        border-color: rgba(255, 255, 255, 0.1);
+                        transform: translateX(4px);
+                    }
+
+                    .ac-icon {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background: var(--bg-body);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: var(--accent-purple);
+                        flex-shrink: 0;
+                    }
+
+                    .ac-content {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+
+                    .ac-title {
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                    }
+
+                    .ac-meta {
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+
+                    .ac-arrow {
+                        opacity: 0;
+                        transition: 0.2s;
+                        color: var(--text-secondary);
+                    }
+
+                    .archive-card:hover .ac-arrow {
+                        opacity: 1;
+                        transform: translateX(2px);
+                    }
+
+                    .empty-state {
+                        text-align: center;
+                        padding: 40px 0;
+                        color: var(--text-secondary);
+                        font-size: 0.9rem;
+                    }
+                </style>
+
+                <div class="archive-header">
                     <div class="section-title">Archive</div>
+                    <div class="archive-controls">
+                        <input type="text" id="archiveSearch" class="search-box" placeholder="Search reports...">
+                        <!-- <input type="month" id="archiveMonth" class="date-filter"> -->
+                    </div>
                 </div>
 
-                
-                
-                <div class="history-group">
-                    <div class="h-group-title">AI</div>
-                    
-                    
-                    
-                    
-                    <a href="InsightHub_newsletter_2026-02-07.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 07, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_newsletter_2026-02-06.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 06, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_newsletter_2026-02-05.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 05, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_newsletter_2026-02-04.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 04, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_newsletter_2026-02-03.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 03, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
+                <div id="archiveContainer">
+                    <!-- Dynamic Content Injected Here -->
                 </div>
-                
-                
-                
-                <div class="history-group">
-                    <div class="h-group-title">Cybersecurity</div>
-                    
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-07.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 07, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-06.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 06, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-05.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 05, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-04.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 04, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-03.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 03, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_cybersecurity_2026-02-02.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 02, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                </div>
-                
-                
-                
-                <div class="history-group">
-                    <div class="h-group-title">Financial Services</div>
-                    
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-07.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 07, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-06.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 06, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-05.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 05, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-04.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 04, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-03.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 03, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_financial_services_2026-02-02.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 02, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                </div>
-                
-                
-                
-                <div class="history-group">
-                    <div class="h-group-title">Healthcare</div>
-                    
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-07.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 07, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-06.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 06, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-05.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 05, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-04.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 04, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-03.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 03, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_healthcare_2026-02-02.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 02, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                </div>
-                
-                
-                
-                <div class="history-group">
-                    <div class="h-group-title">Transportation</div>
-                    
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-07.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 07, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-06.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 06, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-05.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 05, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-04.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 04, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-03.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 03, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                    
-                    <a href="InsightHub_transportation_2026-02-02.html" style="text-decoration: none; color: inherit;">
-                        <div class="history-item">
-                            <div class="h-icon">
-                                <i data-lucide="file"></i>
-                            </div>
-                            <div class="h-info">
-                                <div class="h-date">February 02, 2026</div>
-                            </div>
-                            <div class="h-status">
-                                <div class="dot"></div>
-                                Ready
-                            </div>
-                        </div>
-                    </a>
-                    
-                    
-                </div>
-                
-                
-
             </div>
+
+            <script>
+                // Safely parse the JSON data from Jinja2
+                const allReports = JSON.parse('[{"sector": "AI", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_newsletter_2026-02-08.html"}, {"sector": "Healthcare", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_healthcare_2026-02-08.html"}, {"sector": "Transportation", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_transportation_2026-02-08.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_cybersecurity_2026-02-08.html"}, {"sector": "Financial Services", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_financial_services_2026-02-08.html"}, {"sector": "AI", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_newsletter_2026-02-07.html"}, {"sector": "Healthcare", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_healthcare_2026-02-07.html"}, {"sector": "Transportation", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_transportation_2026-02-07.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_cybersecurity_2026-02-07.html"}, {"sector": "Financial Services", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_financial_services_2026-02-07.html"}, {"sector": "AI", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_newsletter_2026-02-06.html"}, {"sector": "Healthcare", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_healthcare_2026-02-06.html"}, {"sector": "Transportation", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_transportation_2026-02-06.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_cybersecurity_2026-02-06.html"}, {"sector": "Financial Services", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_financial_services_2026-02-06.html"}, {"sector": "AI", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_newsletter_2026-02-05.html"}, {"sector": "Healthcare", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_healthcare_2026-02-05.html"}, {"sector": "Transportation", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_transportation_2026-02-05.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_cybersecurity_2026-02-05.html"}, {"sector": "Financial Services", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_financial_services_2026-02-05.html"}, {"sector": "AI", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_newsletter_2026-02-04.html"}, {"sector": "Healthcare", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_healthcare_2026-02-04.html"}, {"sector": "Transportation", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_transportation_2026-02-04.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_cybersecurity_2026-02-04.html"}, {"sector": "Financial Services", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_financial_services_2026-02-04.html"}, {"sector": "AI", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_newsletter_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_healthcare_2026-02-03.html"}, {"sector": "Transportation", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_transportation_2026-02-03.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_cybersecurity_2026-02-03.html"}, {"sector": "Financial Services", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_financial_services_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_healthcare_2026-02-02.html"}, {"sector": "Transportation", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_transportation_2026-02-02.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_cybersecurity_2026-02-02.html"}, {"sector": "Financial Services", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_financial_services_2026-02-02.html"}]');
+
+                const archiveContainer = document.getElementById('archiveContainer');
+                const searchInput = document.getElementById('archiveSearch');
+
+                // Render Reports Function
+                function renderReports(reports) {
+                    archiveContainer.innerHTML = '';
+
+                    if (reports.length === 0) {
+                        archiveContainer.innerHTML = '<div class="empty-state">No reports found matching your criteria.</div>';
+                        return;
+                    }
+
+                    // Group by Month
+                    const groups = {};
+                    reports.forEach(report => {
+                        const date = new Date(report.date_obj);
+                        const monthKey = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                        if (!groups[monthKey]) groups[monthKey] = [];
+                        groups[monthKey].push(report);
+                    });
+
+                    // Render Groups
+                    for (const [month, groupReports] of Object.entries(groups)) {
+                        const groupDiv = document.createElement('div');
+                        groupDiv.className = 'history-group-month';
+
+                        let cardsHtml = '';
+                        groupReports.forEach(r => {
+                            cardsHtml += `
+                                <a href="${r.filename}" class="archive-card">
+                                    <div class="ac-icon">
+                                        <i data-lucide="file-text" size="18"></i>
+                                    </div>
+                                    <div class="ac-content">
+                                        <div class="ac-title">${r.sector} Briefing</div>
+                                        <div class="ac-meta">
+                                            <span>${new Date(r.date_obj).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' })}</span>
+                                        </div>
+                                    </div>
+                                    <div class="ac-arrow">
+                                        <i data-lucide="arrow-right" size="16"></i>
+                                    </div>
+                                </a>
+                            `;
+                        });
+
+                        groupDiv.innerHTML = `
+                            <div class="month-header">
+                                ${month}
+                                <span class="month-count">${groupReports.length}</span>
+                            </div>
+                            <div class="group-content">
+                                ${cardsHtml}
+                            </div>
+                        `;
+                        archiveContainer.appendChild(groupDiv);
+                    }
+
+                    // Re-init icons for new content
+                    lucide.createIcons();
+                }
+
+                // Initial Render
+                renderReports(allReports);
+
+                // Filter Logic
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const filtered = allReports.filter(r =>
+                        r.sector.toLowerCase().includes(term) ||
+                        r.date_str.toLowerCase().includes(term)
+                    );
+                    renderReports(filtered);
+                });
+
+            </script>
         </div>
 
     </div>
