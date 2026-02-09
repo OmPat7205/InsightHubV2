@@ -96,9 +96,9 @@
 
         .nav-link.active {
             background: var(--text-primary);
-            color: black;
+            color: var(--bg-body);
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .nav-link:hover:not(.active) {
@@ -266,7 +266,7 @@
         .section-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: white;
+            color: var(--text-primary);
         }
 
         .report-card {
@@ -276,7 +276,9 @@
             padding: 25px;
             cursor: pointer;
             text-decoration: none;
-            color: white;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -453,6 +455,28 @@
             font-size: 0.7rem;
         }
 
+        /* Elements to hide in Compact Mode */
+        [data-density="compact"] .report-meta i {
+            display: none;
+        }
+
+        [data-density="compact"] .hero {
+            margin-bottom: 20px;
+        }
+
+        [data-density="compact"] .hero h1 {
+            font-size: 2rem;
+        }
+
+        [data-density="compact"] .hero-date {
+            font-size: 0.9rem;
+        }
+
+        [data-density="compact"] .badge.sector {
+            display: none;
+        }
+
+
         [data-density="compact"] .card {
             padding: 20px;
         }
@@ -498,7 +522,7 @@
 
     <!-- Hero -->
     <div class="hero">
-        <h1>Welcome, <span style="font-weight: 600; color: white;">Team</span></h1>
+        <h1>Welcome, <span style="font-weight: 600; color: var(--text-primary);">Team</span></h1>
         <div class="hero-date" id="currentDate">Daily Intelligence Overview</div>
     </div>
 
