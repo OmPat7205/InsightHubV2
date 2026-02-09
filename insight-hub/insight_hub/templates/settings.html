@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Insight Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-body: #050505;
+            --bg-card: #121212;
+            --bg-card-hover: #1a1a1a;
+            --border-color: #262626;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --accent-purple: #8b5cf6;
+            --nav-bg: #1e1e1e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 30px;
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding: 0 10px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand img {
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .nav-pill {
+            background: var(--nav-bg);
+            padding: 6px;
+            border-radius: 50px;
+            display: flex;
+            gap: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-link {
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link.active {
+            background: var(--text-primary);
+            color: black;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link:hover:not(.active) {
+            color: white;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Settings Layout */
+        .settings-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar */
+        .settings-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .sidebar-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Content */
+        .settings-content {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .settings-header {
+            margin-bottom: 30px;
+        }
+
+        .settings-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .settings-header p {
+            color: var(--text-secondary);
+        }
+
+        .setting-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-row:first-child {
+            padding-top: 0;
+        }
+
+        .setting-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .setting-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Controls */
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #202020;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        input[type="color"] {
+            background: none;
+            border: none;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .color-hex {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .theme-card {
+            background: #202020;
+            border: 2px solid transparent;
+            /* Prepare for active state */
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .theme-card.active {
+            border-color: var(--accent-purple);
+        }
+
+        .theme-preview {
+            height: 80px;
+            background: #333;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .theme-preview.default {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+        }
+
+        .theme-preview.light {
+            /* Just for demo, we are staying dark mostly */
+            background: #eee;
+        }
+
+        .theme-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .check-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            padding: 2px;
+            color: white;
+            display: none;
+        }
+
+        .theme-card.active .check-icon {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Nav -->
+    <nav class="top-nav">
+        <div class="brand">
+            {% if logo_src %}
+            <img src="{{ logo_src }}" alt="Logo">
+            {% endif %}
+            Insight Hub
+        </div>
+
+        <div class="nav-pill">
+            <a href="index.html" class="nav-link">Dashboard</a>
+            <a href="#" class="nav-link">Reports</a>
+            <a href="settings.html" class="nav-link active">Settings</a>
+        </div>
+
+        <div class="user-actions">
+            <div class="icon-btn"><i data-lucide="bell"></i></div>
+            <div class="icon-btn"><i data-lucide="plus"></i></div>
+        </div>
+    </nav>
+
+    <div class="settings-container">
+        <!-- Sidebar -->
+        <div class="settings-sidebar">
+            <div class="sidebar-item active" onclick="switchTab('appearance')">
+                <i data-lucide="palette" size="18"></i> Appearance
+            </div>
+            <div class="sidebar-item" onclick="switchTab('account')">
+                <i data-lucide="user" size="18"></i> Account
+            </div>
+            <div class="sidebar-item" onclick="switchTab('notifications')">
+                <i data-lucide="bell" size="18"></i> Notifications
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="settings-content" id="appearance-tab">
+            <div class="settings-header">
+                <h1>Appearance</h1>
+                <p>Customize how Insight Hub looks and feels.</p>
+            </div>
+
+            <div class="setting-section">
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h3>Brand Color</h3>
+                        <p>Select your primary accent color.</p>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="brandColor" value="#8b5cf6">
+                        <span class="color-hex" id="colorValue">#8b5cf6</span>
+                    </div>
+                </div>
+
+                <div class="setting-row" style="display: block;">
+                    <div class="setting-info" style="margin-bottom: 20px;">
+                        <h3>Theme Mode</h3>
+                        <p>Select the interface theme.</p>
+                    </div>
+
+                    <div class="theme-grid">
+                        <div class="theme-card active" onclick="setTheme('dark')">
+                            <div class="theme-preview default"></div>
+                            <div class="theme-label">Dark (Default)</div>
+                            <div class="check-icon"><i data-lucide="check" size="12"></i></div>
+                        </div>
+                        <!-- Placeholder for future themes -->
+                        <div class="theme-card" style="opacity: 0.5; cursor: not-allowed;">
+                            <div class="theme-preview light"></div>
+                            <div class="theme-label">Light (Coming Soon)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. Color Picker Logic
+        const brandColorInput = document.getElementById('brandColor');
+        const colorValue = document.getElementById('colorValue');
+
+        // Load saved color
+        const savedColor = localStorage.getItem('brandColor') || '#8b5cf6';
+        brandColorInput.value = savedColor;
+        colorValue.textContent = savedColor;
+        document.documentElement.style.setProperty('--accent-purple', savedColor);
+
+        brandColorInput.addEventListener('input', (e) => {
+            const color = e.target.value;
+            colorValue.textContent = color;
+
+            // Apply immediately
+            document.documentElement.style.setProperty('--accent-purple', color);
+
+            // Save
+            localStorage.setItem('brandColor', color);
+        });
+
+        function switchTab(tabName) {
+            // Simple visual switch for demo (only Appearance is functional)
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.innerText.toLowerCase().includes(tabName)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        function setTheme(theme) {
+            // Just a placeholder for now
+            console.log("Theme set to", theme);
+        }
+    </script>
+</body>
+
+</html>

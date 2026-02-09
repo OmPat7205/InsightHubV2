@@ -100,6 +100,17 @@ def generate_site():
         f.write(html_out)
 
     print(f"Site Index generated at: {index_path}")
+
+    # 7. Render Settings Page
+    settings_template = env.get_template("settings.html")
+    settings_html = settings_template.render(
+        logo_src=logo_src
+    )
+    
+    settings_path = os.path.join(OUTPUT_DIR, "settings.html")
+    with open(settings_path, "w") as f:
+        f.write(settings_html)
+    print(f"Settings page generated at: {settings_path}")
     print("You can now upload the 'output' folder to any static host (Netlify, GitHub Pages).")
 
 if __name__ == "__main__":

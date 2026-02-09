@@ -146,23 +146,17 @@
         /* Bento Grid Layout */
         .bento-grid {
             display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            /* Sidebar Stats, Main Content, History List */
+            grid-template-columns: 1fr 350px;
+            /* Main Content, History List */
             gap: 25px;
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
             .bento-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .col-stats {
-                grid-column: span 2;
-                display: flex;
-                gap: 20px;
+                grid-template-columns: 1fr;
             }
         }
 
@@ -457,7 +451,7 @@
         <div class="nav-pill">
             <a href="#" class="nav-link active">Dashboard</a>
             <a href="#" class="nav-link">Reports</a>
-            <a href="#" class="nav-link">Settings</a>
+            <a href="settings.html" class="nav-link">Settings</a>
         </div>
 
         <div class="user-actions">
@@ -475,41 +469,7 @@
     <!-- Main Grid -->
     <div class="bento-grid">
 
-        <!-- Column 1: Stats -->
-        <div class="col-stats" style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="card stat-card purple">
-                <div class="stat-label">
-                    <span>Total Reports</span>
-                    <i data-lucide="file-text" size="18"></i>
-                </div>
-                <div class="stat-value">
-                    {% set total_reports = namespace(value=0) %}
-                    {% for reports in sectors.values() %}
-                    {% set total_reports.value = total_reports.value + reports|length %}
-                    {% endfor %}
-                    {{ total_reports.value }}
-                </div>
-                <div class="stat-sub">Generated automatically</div>
-            </div>
 
-            <div class="card stat-card">
-                <div class="stat-label">
-                    <span>Active Sectors</span>
-                    <i data-lucide="pie-chart" size="18"></i>
-                </div>
-                <div class="stat-value">{{ sectors|length }}</div>
-                <div class="stat-sub">Monitoring 24/7</div>
-            </div>
-
-            <div class="card stat-card" style="background: var(--accent-yellow); color: black; border: none;">
-                <div class="stat-label" style="color: rgba(0,0,0,0.6);">
-                    <span>System Status</span>
-                    <i data-lucide="activity" size="18"></i>
-                </div>
-                <div class="stat-value" style="background: none; -webkit-text-fill-color: black;">Active</div>
-                <div class="stat-sub" style="color: rgba(0,0,0,0.6);">Next Run: 7:00 AM</div>
-            </div>
-        </div>
 
         <!-- Column 2: Feed -->
         <div class="col-feed">
@@ -837,6 +797,13 @@
                 }, index * 50);
             });
         });
+    </script>
+    <script>
+        // Apply saved brand color
+        const savedColor = localStorage.getItem('brandColor');
+        if (savedColor) {
+            document.documentElement.style.setProperty('--accent-purple', savedColor);
+        }
     </script>
 </body>
 

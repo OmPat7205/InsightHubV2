@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insight Hub | Intelligence Dashboard</title>
+    <title>Settings | Insight Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
@@ -19,9 +19,6 @@
             --text-primary: #ffffff;
             --text-secondary: #888888;
             --accent-purple: #8b5cf6;
-            --accent-purple-glow: rgba(139, 92, 246, 0.2);
-            --accent-yellow: #facc15;
-            --accent-green: #22c55e;
             --nav-bg: #1e1e1e;
         }
 
@@ -106,7 +103,6 @@
             height: 44px;
             border-radius: 50%;
             display: flex;
-            /* Centering content */
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
@@ -116,323 +112,198 @@
 
         .icon-btn:hover {
             background: var(--bg-card-hover);
-            border-color: #444;
             transform: translateY(-2px);
         }
 
-        /* Hero Text */
-        .hero {
-            margin-bottom: 40px;
-            padding: 0 10px;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .hero span {
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-
-        .hero-date {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* Bento Grid Layout */
-        .bento-grid {
+        /* Settings Layout */
+        .settings-container {
             display: grid;
-            grid-template-columns: 1fr 350px;
-            /* Main Content, History List */
-            gap: 25px;
-            max-width: 1400px;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .col-stats {
-                flex-direction: column;
-            }
-
-            .top-nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 28px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Stat Card Styles */
-        .stat-card {
+        /* Sidebar */
+        .settings-sidebar {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 180px;
+            gap: 5px;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #444;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .stat-label {
+        .sidebar-item {
+            padding: 10px 15px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .stat-value {
-            font-size: 2.8rem;
-            font-weight: 500;
-            letter-spacing: -1px;
-        }
-
-        .stat-sub {
-            font-size: 0.85rem;
-            margin-top: 10px;
-            opacity: 0.7;
-        }
-
-        .stat-card.purple {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
-        }
-
-        .stat-card.purple .stat-value {
-            background: linear-gradient(to right, #a78bfa, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Main Feed Section */
-        .col-feed {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .sector-section {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .report-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 25px;
-            cursor: pointer;
             text-decoration: none;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .report-card:hover {
-            background: var(--bg-card-hover);
-            transform: scale(1.02);
-            border-color: var(--accent-purple);
-        }
-
-        .report-badges {
-            display: flex;
-            gap: 10px;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-        }
-
-        .badge.sector {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .badge.new {
-            background: var(--accent-purple);
-            color: black;
-        }
-
-        .report-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .report-meta {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
-        /* History List (Right Col) */
-        .history-list {
+        .sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .sidebar-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Content */
+        .settings-content {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .settings-header {
+            margin-bottom: 30px;
+        }
+
+        .settings-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .settings-header p {
+            color: var(--text-secondary);
+        }
+
+        .setting-section {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 28px;
+            border-radius: 16px;
             padding: 25px;
-            /* Limit height and scroll */
-            max-height: 600px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .history-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: 0.2s;
-        }
-
-        .history-item:last-child {
-            border-bottom: none;
-        }
-
-        .history-item:hover {
-            padding-left: 10px;
-            padding-right: 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            border-bottom-color: transparent;
-        }
-
-        .h-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: #202020;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: white;
-        }
-
-        .h-info {
-            flex: 1;
-        }
-
-        .h-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-        }
-
-        .h-date {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
-
-        .h-status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            color: var(--accent-green);
-            background: rgba(34, 197, 94, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-        }
-
-        /* History Grouping */
-        .history-group {
             margin-bottom: 25px;
         }
 
-        .h-group-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            padding-left: 12px;
-            border-left: 3px solid var(--accent-purple);
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Animations */
+        .setting-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-row:first-child {
+            padding-top: 0;
+        }
+
+        .setting-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .setting-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Controls */
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #202020;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        input[type="color"] {
+            background: none;
+            border: none;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .color-hex {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .theme-card {
+            background: #202020;
+            border: 2px solid transparent;
+            /* Prepare for active state */
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .theme-card.active {
+            border-color: var(--accent-purple);
+        }
+
+        .theme-preview {
+            height: 80px;
+            background: #333;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .theme-preview.default {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+        }
+
+        .theme-preview.light {
+            /* Just for demo, we are staying dark mostly */
+            background: #eee;
+        }
+
+        .theme-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .check-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            padding: 2px;
+            color: white;
+            display: none;
+        }
+
+        .theme-card.active .check-icon {
+            display: block;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 10px;
         }
     </style>
 </head>
@@ -449,9 +320,9 @@
         </div>
 
         <div class="nav-pill">
-            <a href="#" class="nav-link active">Dashboard</a>
+            <a href="index.html" class="nav-link">Dashboard</a>
             <a href="#" class="nav-link">Reports</a>
-            <a href="settings.html" class="nav-link">Settings</a>
+            <a href="settings.html" class="nav-link active">Settings</a>
         </div>
 
         <div class="user-actions">
@@ -460,409 +331,99 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <div class="hero">
-        <h1>Welcome, <span style="font-weight: 600; color: white;">Team</span></h1>
-        <div class="hero-date" id="currentDate">Daily Intelligence Overview</div>
-    </div>
-
-    <!-- Main Grid -->
-    <div class="bento-grid">
-
-
-
-        <!-- Column 2: Feed -->
-        <div class="col-feed">
-            <div class="section-header">
-                <div class="section-title">Latest Intelligence</div>
+    <div class="settings-container">
+        <!-- Sidebar -->
+        <div class="settings-sidebar">
+            <div class="sidebar-item active" onclick="switchTab('appearance')">
+                <i data-lucide="palette" size="18"></i> Appearance
             </div>
-
-            
-            
-            
-            <a href="InsightHub_newsletter_2026-02-08.html" class="report-card">
-                <div class="report-badges">
-                    <span class="badge sector">AI</span>
-                    <span class="badge new">New</span>
-                </div>
-                <div class="report-title">AI Daily Briefing</div>
-                <div class="report-meta">
-                    <i data-lucide="clock" size="14"></i>
-                    February 08, 2026
-                </div>
-            </a>
-            
-            
-            
-            
-            <a href="InsightHub_cybersecurity_2026-02-08.html" class="report-card">
-                <div class="report-badges">
-                    <span class="badge sector">Cybersecurity</span>
-                    <span class="badge new">New</span>
-                </div>
-                <div class="report-title">Cybersecurity Daily Briefing</div>
-                <div class="report-meta">
-                    <i data-lucide="clock" size="14"></i>
-                    February 08, 2026
-                </div>
-            </a>
-            
-            
-            
-            
-            <a href="InsightHub_financial_services_2026-02-08.html" class="report-card">
-                <div class="report-badges">
-                    <span class="badge sector">Financial Services</span>
-                    <span class="badge new">New</span>
-                </div>
-                <div class="report-title">Financial Services Daily Briefing</div>
-                <div class="report-meta">
-                    <i data-lucide="clock" size="14"></i>
-                    February 08, 2026
-                </div>
-            </a>
-            
-            
-            
-            
-            <a href="InsightHub_healthcare_2026-02-08.html" class="report-card">
-                <div class="report-badges">
-                    <span class="badge sector">Healthcare</span>
-                    <span class="badge new">New</span>
-                </div>
-                <div class="report-title">Healthcare Daily Briefing</div>
-                <div class="report-meta">
-                    <i data-lucide="clock" size="14"></i>
-                    February 08, 2026
-                </div>
-            </a>
-            
-            
-            
-            
-            <a href="InsightHub_transportation_2026-02-08.html" class="report-card">
-                <div class="report-badges">
-                    <span class="badge sector">Transportation</span>
-                    <span class="badge new">New</span>
-                </div>
-                <div class="report-title">Transportation Daily Briefing</div>
-                <div class="report-meta">
-                    <i data-lucide="clock" size="14"></i>
-                    February 08, 2026
-                </div>
-            </a>
-            
-            
+            <div class="sidebar-item" onclick="switchTab('account')">
+                <i data-lucide="user" size="18"></i> Account
+            </div>
+            <div class="sidebar-item" onclick="switchTab('notifications')">
+                <i data-lucide="bell" size="18"></i> Notifications
+            </div>
         </div>
 
-        <!-- Column 3: History List -->
-        <div class="col-history">
-            <div class="history-list">
-                <style>
-                    /* Archive specific styles */
-                    .archive-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                        flex-wrap: wrap;
-                        gap: 10px;
-                        flex-shrink: 0;
-                    }
+        <!-- Content -->
+        <div class="settings-content" id="appearance-tab">
+            <div class="settings-header">
+                <h1>Appearance</h1>
+                <p>Customize how Insight Hub looks and feels.</p>
+            </div>
 
-                    #archiveContainer {
-                        overflow-y: auto;
-                        padding-right: 5px;
-                    }
-
-                    .archive-controls {
-                        display: flex;
-                        gap: 10px;
-                    }
-
-                    .search-box {
-                        background: var(--bg-body);
-                        border: 1px solid var(--border-color);
-                        padding: 8px 12px;
-                        border-radius: 8px;
-                        color: white;
-                        font-family: inherit;
-                        font-size: 0.9rem;
-                        outline: none;
-                        width: 180px;
-                        transition: border-color 0.2s;
-                    }
-
-                    .search-box:focus {
-                        border-color: var(--accent-purple);
-                    }
-
-                    .date-filter {
-                        background: var(--bg-body);
-                        border: 1px solid var(--border-color);
-                        padding: 7px 10px;
-                        border-radius: 8px;
-                        color: white;
-                        font-family: inherit;
-                        cursor: pointer;
-                        outline: none;
-                        color-scheme: dark;
-                        /* Dark mode calendar */
-                    }
-
-                    .date-filter:focus {
-                        border-color: var(--accent-purple);
-                    }
-
-                    .history-group-sector {
-                        margin-bottom: 25px;
-                        animation: fadeIn 0.5s ease-out;
-                    }
-
-                    .sector-header {
-                        font-size: 0.85rem;
-                        font-weight: 700;
-                        color: var(--text-secondary);
-                        text-transform: uppercase;
-                        letter-spacing: 1px;
-                        margin-bottom: 12px;
-                        padding-bottom: 5px;
-                        border-bottom: 1px solid var(--border-color);
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        position: sticky;
-                        top: 0;
-                        background: var(--bg-card);
-                        z-index: 10;
-                    }
-
-                    .sector-count {
-                        font-size: 0.75rem;
-                        background: var(--bg-body);
-                        padding: 2px 8px;
-                        border-radius: 12px;
-                        color: var(--text-secondary);
-                    }
-
-                    .archive-card {
-                        background: rgba(255, 255, 255, 0.02);
-                        border: 1px solid transparent;
-                        border-radius: 16px;
-                        padding: 14px;
-                        margin-bottom: 8px;
-                        display: flex;
-                        align-items: center;
-                        gap: 15px;
-                        transition: all 0.2s ease;
-                        text-decoration: none;
-                        color: inherit;
-                    }
-
-                    .archive-card:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                        border-color: rgba(255, 255, 255, 0.1);
-                        transform: translateX(4px);
-                    }
-
-                    .ac-icon {
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 10px;
-                        background: var(--bg-body);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: var(--accent-purple);
-                        flex-shrink: 0;
-                    }
-
-                    .ac-content {
-                        flex: 1;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 2px;
-                    }
-
-                    .ac-title {
-                        font-weight: 600;
-                        font-size: 0.9rem;
-                    }
-
-                    .ac-meta {
-                        font-size: 0.75rem;
-                        color: var(--text-secondary);
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                    }
-
-                    .ac-arrow {
-                        opacity: 0;
-                        transition: 0.2s;
-                        color: var(--text-secondary);
-                    }
-
-                    .archive-card:hover .ac-arrow {
-                        opacity: 1;
-                        transform: translateX(2px);
-                    }
-
-                    .empty-state {
-                        text-align: center;
-                        padding: 40px 0;
-                        color: var(--text-secondary);
-                        font-size: 0.9rem;
-                    }
-                </style>
-
-                <div class="archive-header">
-                    <div class="section-title">Archive</div>
-                    <div class="archive-controls">
-                        <input type="text" id="archiveSearch" class="search-box" placeholder="Search...">
-                        <input type="date" id="archiveDate" class="date-filter">
+            <div class="setting-section">
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h3>Brand Color</h3>
+                        <p>Select your primary accent color.</p>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="brandColor" value="#8b5cf6">
+                        <span class="color-hex" id="colorValue">#8b5cf6</span>
                     </div>
                 </div>
 
-                <div id="archiveContainer">
-                    <!-- Dynamic Content Injected Here -->
+                <div class="setting-row" style="display: block;">
+                    <div class="setting-info" style="margin-bottom: 20px;">
+                        <h3>Theme Mode</h3>
+                        <p>Select the interface theme.</p>
+                    </div>
+
+                    <div class="theme-grid">
+                        <div class="theme-card active" onclick="setTheme('dark')">
+                            <div class="theme-preview default"></div>
+                            <div class="theme-label">Dark (Default)</div>
+                            <div class="check-icon"><i data-lucide="check" size="12"></i></div>
+                        </div>
+                        <!-- Placeholder for future themes -->
+                        <div class="theme-card" style="opacity: 0.5; cursor: not-allowed;">
+                            <div class="theme-preview light"></div>
+                            <div class="theme-label">Light (Coming Soon)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <script>
-                // Safely parse the JSON data from Jinja2
-                try {
-                    const allReports = JSON.parse('[{"sector": "AI", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_newsletter_2026-02-08.html"}, {"sector": "Healthcare", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_healthcare_2026-02-08.html"}, {"sector": "Transportation", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_transportation_2026-02-08.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_cybersecurity_2026-02-08.html"}, {"sector": "Financial Services", "date_obj": "2026-02-08T00:00:00", "date_str": "February 08, 2026", "filename": "InsightHub_financial_services_2026-02-08.html"}, {"sector": "AI", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_newsletter_2026-02-07.html"}, {"sector": "Healthcare", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_healthcare_2026-02-07.html"}, {"sector": "Transportation", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_transportation_2026-02-07.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_cybersecurity_2026-02-07.html"}, {"sector": "Financial Services", "date_obj": "2026-02-07T00:00:00", "date_str": "February 07, 2026", "filename": "InsightHub_financial_services_2026-02-07.html"}, {"sector": "AI", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_newsletter_2026-02-06.html"}, {"sector": "Healthcare", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_healthcare_2026-02-06.html"}, {"sector": "Transportation", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_transportation_2026-02-06.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_cybersecurity_2026-02-06.html"}, {"sector": "Financial Services", "date_obj": "2026-02-06T00:00:00", "date_str": "February 06, 2026", "filename": "InsightHub_financial_services_2026-02-06.html"}, {"sector": "AI", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_newsletter_2026-02-05.html"}, {"sector": "Healthcare", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_healthcare_2026-02-05.html"}, {"sector": "Transportation", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_transportation_2026-02-05.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_cybersecurity_2026-02-05.html"}, {"sector": "Financial Services", "date_obj": "2026-02-05T00:00:00", "date_str": "February 05, 2026", "filename": "InsightHub_financial_services_2026-02-05.html"}, {"sector": "AI", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_newsletter_2026-02-04.html"}, {"sector": "Healthcare", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_healthcare_2026-02-04.html"}, {"sector": "Transportation", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_transportation_2026-02-04.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_cybersecurity_2026-02-04.html"}, {"sector": "Financial Services", "date_obj": "2026-02-04T00:00:00", "date_str": "February 04, 2026", "filename": "InsightHub_financial_services_2026-02-04.html"}, {"sector": "AI", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_newsletter_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_healthcare_2026-02-03.html"}, {"sector": "Transportation", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_transportation_2026-02-03.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_cybersecurity_2026-02-03.html"}, {"sector": "Financial Services", "date_obj": "2026-02-03T00:00:00", "date_str": "February 03, 2026", "filename": "InsightHub_financial_services_2026-02-03.html"}, {"sector": "Healthcare", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_healthcare_2026-02-02.html"}, {"sector": "Transportation", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_transportation_2026-02-02.html"}, {"sector": "Cybersecurity", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_cybersecurity_2026-02-02.html"}, {"sector": "Financial Services", "date_obj": "2026-02-02T00:00:00", "date_str": "February 02, 2026", "filename": "InsightHub_financial_services_2026-02-02.html"}]');
-
-                    const archiveContainer = document.getElementById('archiveContainer');
-                    const searchInput = document.getElementById('archiveSearch');
-                    const dateInput = document.getElementById('archiveDate');
-
-                    // Render Reports Function
-                    function renderReports(reports) {
-                        archiveContainer.innerHTML = '';
-
-                        if (reports.length === 0) {
-                            archiveContainer.innerHTML = '<div class="empty-state">No reports found matching your criteria.</div>';
-                            return;
-                        }
-
-                        // Group by Sector
-                        const groups = {};
-                        reports.forEach(report => {
-                            const key = report.sector;
-                            if (!groups[key]) groups[key] = [];
-                            groups[key].push(report);
-                        });
-
-                        // Sort sectors alphabetically
-                        const sortedKeys = Object.keys(groups).sort();
-
-                        // Render Groups
-                        sortedKeys.forEach(sector => {
-                            const groupReports = groups[sector];
-                            const groupDiv = document.createElement('div');
-                            groupDiv.className = 'history-group-sector';
-
-                            let cardsHtml = '';
-                            groupReports.forEach(r => {
-                                cardsHtml += `
-                                    <a href="${r.filename}" class="archive-card">
-                                        <div class="ac-icon">
-                                            <i data-lucide="file-text" size="16"></i>
-                                        </div>
-                                        <div class="ac-content">
-                                            <div class="ac-title">${r.sector} Briefing</div>
-                                            <div class="ac-meta">
-                                                <span>${new Date(r.date_obj).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                                            </div>
-                                        </div>
-                                        <div class="ac-arrow">
-                                            <i data-lucide="arrow-right" size="16"></i>
-                                        </div>
-                                    </a>
-                                `;
-                            });
-
-                            groupDiv.innerHTML = `
-                                <div class="sector-header">
-                                    ${sector}
-                                    <span class="sector-count">${groupReports.length}</span>
-                                </div>
-                                <div class="group-content">
-                                    ${cardsHtml}
-                                </div>
-                            `;
-                            archiveContainer.appendChild(groupDiv);
-                        });
-
-                        // Re-init icons for new content
-                        lucide.createIcons();
-                    }
-
-                    // Initial Render
-                    renderReports(allReports);
-
-                    // Filter Logic
-                    function filterReports() {
-                        const term = searchInput.value.toLowerCase();
-                        const dateVal = dateInput.value; // YYYY-MM-DD
-
-                        const filtered = allReports.filter(r => {
-                            const matchesText = r.sector.toLowerCase().includes(term) || r.date_str.toLowerCase().includes(term);
-                            let matchesDate = true;
-
-                            if (dateVal) {
-                                // r.date_obj is ISO string "YYYY-MM-DDTHH:MM:SS"
-                                // We just want YYYY-MM-DD
-                                const reportDate = r.date_obj.split('T')[0];
-                                matchesDate = reportDate === dateVal;
-                            }
-
-                            return matchesText && matchesDate;
-                        });
-
-                        renderReports(filtered);
-                    }
-
-                    searchInput.addEventListener('input', filterReports);
-                    dateInput.addEventListener('change', filterReports);
-
-                } catch (e) {
-                    console.error("Error initializing archive:", e);
-                }
-            </script>
         </div>
-
     </div>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Update Date
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+        // 1. Color Picker Logic
+        const brandColorInput = document.getElementById('brandColor');
+        const colorValue = document.getElementById('colorValue');
 
-        // Simple Staggered Animation for cards on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.card, .report-card, .history-item');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 50);
-            });
+        // Load saved color
+        const savedColor = localStorage.getItem('brandColor') || '#8b5cf6';
+        brandColorInput.value = savedColor;
+        colorValue.textContent = savedColor;
+        document.documentElement.style.setProperty('--accent-purple', savedColor);
+
+        brandColorInput.addEventListener('input', (e) => {
+            const color = e.target.value;
+            colorValue.textContent = color;
+
+            // Apply immediately
+            document.documentElement.style.setProperty('--accent-purple', color);
+
+            // Save
+            localStorage.setItem('brandColor', color);
         });
-    </script>
-    <script>
-        // Apply saved brand color
-        const savedColor = localStorage.getItem('brandColor');
-        if (savedColor) {
-            document.documentElement.style.setProperty('--accent-purple', savedColor);
+
+        function switchTab(tabName) {
+            // Simple visual switch for demo (only Appearance is functional)
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.innerText.toLowerCase().includes(tabName)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        function setTheme(theme) {
+            // Just a placeholder for now
+            console.log("Theme set to", theme);
         }
     </script>
 </body>
