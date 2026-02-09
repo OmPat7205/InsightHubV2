@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
+            /* Default Dark Theme */
             --bg-body: #050505;
             --bg-card: #121212;
             --bg-card-hover: #1a1a1a;
@@ -23,6 +24,17 @@
             --accent-yellow: #facc15;
             --accent-green: #22c55e;
             --nav-bg: #1e1e1e;
+        }
+
+        [data-theme="light"] {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-purple-glow: rgba(139, 92, 246, 0.1);
+            --nav-bg: #ffffff;
         }
 
         * {
@@ -426,6 +438,30 @@
             width: 6px;
         }
 
+        /* Density: Compact */
+        [data-density="compact"] .report-card {
+            padding: 15px;
+            gap: 8px;
+        }
+
+        [data-density="compact"] .report-title {
+            font-size: 1.1rem;
+        }
+
+        [data-density="compact"] .badge {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+        }
+
+        [data-density="compact"] .card {
+            padding: 20px;
+        }
+
+        [data-density="compact"] .history-item {
+            padding: 10px 0;
+        }
+
+
         ::-webkit-scrollbar-track {
             background: var(--bg-body);
         }
@@ -803,6 +839,18 @@
         const savedColor = localStorage.getItem('brandColor');
         if (savedColor) {
             document.documentElement.style.setProperty('--accent-purple', savedColor);
+        }
+
+        // Apply saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Apply saved density
+        const savedDensity = localStorage.getItem('density');
+        if (savedDensity) {
+            document.documentElement.setAttribute('data-density', savedDensity);
         }
     </script>
 </body>

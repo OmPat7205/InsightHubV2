@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
+            /* Default Dark Theme */
             --bg-body: #050505;
             --bg-card: #121212;
             --bg-card-hover: #1a1a1a;
@@ -20,6 +21,16 @@
             --text-secondary: #888888;
             --accent-purple: #8b5cf6;
             --nav-bg: #1e1e1e;
+        }
+
+        [data-theme="light"] {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --nav-bg: #ffffff;
         }
 
         * {
@@ -371,15 +382,41 @@
                     </div>
 
                     <div class="theme-grid">
-                        <div class="theme-card active" onclick="setTheme('dark')">
+                        <div class="theme-card active" id="theme-dark" onclick="setTheme('dark')">
                             <div class="theme-preview default"></div>
                             <div class="theme-label">Dark (Default)</div>
                             <div class="check-icon"><i data-lucide="check" size="12"></i></div>
                         </div>
-                        <!-- Placeholder for future themes -->
-                        <div class="theme-card" style="opacity: 0.5; cursor: not-allowed;">
+                        <div class="theme-card" id="theme-light" onclick="setTheme('light')">
                             <div class="theme-preview light"></div>
-                            <div class="theme-label">Light (Coming Soon)</div>
+                            <div class="theme-label">Light</div>
+                            <div class="check-icon"><i data-lucide="check" size="12"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-row" style="display: block;">
+                    <div class="setting-info" style="margin-bottom: 20px;">
+                        <h3>View Density</h3>
+                        <p>Choose how much content to display on the screen.</p>
+                    </div>
+
+                    <div class="theme-grid">
+                        <div class="theme-card active" id="density-comfort" onclick="setDensity('comfort')">
+                            <div class="theme-preview"
+                                style="background: var(--bg-card); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                                <i data-lucide="layout" size="24"></i>
+                            </div>
+                            <div class="theme-label">Comfort</div>
+                            <div class="check-icon"><i data-lucide="check" size="12"></i></div>
+                        </div>
+                        <div class="theme-card" id="density-compact" onclick="setDensity('compact')">
+                            <div class="theme-preview"
+                                style="background: var(--bg-card); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                                <i data-lucide="list" size="24"></i>
+                            </div>
+                            <div class="theme-label">Compact</div>
+                            <div class="check-icon"><i data-lucide="check" size="12"></i></div>
                         </div>
                     </div>
                 </div>
@@ -394,25 +431,37 @@
         const brandColorInput = document.getElementById('brandColor');
         const colorValue = document.getElementById('colorValue');
 
-        // Load saved color
+        // Load saved settings
         const savedColor = localStorage.getItem('brandColor') || '#8b5cf6';
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedDensity = localStorage.getItem('density') || 'comfort';
+
+        // Apply immediately
+        document.documentElement.style.setProperty('--accent-purple', savedColor);
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-density', savedDensity);
+
+        // Update UI
         brandColorInput.value = savedColor;
         colorValue.textContent = savedColor;
-        document.documentElement.style.setProperty('--accent-purple', savedColor);
+
+        // Update Theme UI
+        document.querySelectorAll('[id^="theme-"]').forEach(el => el.classList.remove('active'));
+        document.getElementById(`theme-${savedTheme}`).classList.add('active');
+
+        // Update Density UI
+        document.querySelectorAll('[id^="density-"]').forEach(el => el.classList.remove('active'));
+        document.getElementById(`density-${savedDensity}`).classList.add('active');
+
 
         brandColorInput.addEventListener('input', (e) => {
             const color = e.target.value;
             colorValue.textContent = color;
-
-            // Apply immediately
             document.documentElement.style.setProperty('--accent-purple', color);
-
-            // Save
             localStorage.setItem('brandColor', color);
         });
 
         function switchTab(tabName) {
-            // Simple visual switch for demo (only Appearance is functional)
             document.querySelectorAll('.sidebar-item').forEach(item => {
                 item.classList.remove('active');
                 if (item.innerText.toLowerCase().includes(tabName)) {
@@ -422,8 +471,21 @@
         }
 
         function setTheme(theme) {
-            // Just a placeholder for now
-            console.log("Theme set to", theme);
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+
+            // Update UI
+            document.querySelectorAll('[id^="theme-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById(`theme-${theme}`).classList.add('active');
+        }
+
+        function setDensity(density) {
+            document.documentElement.setAttribute('data-density', density);
+            localStorage.setItem('density', density);
+
+            // Update UI
+            document.querySelectorAll('[id^="density-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById(`density-${density}`).classList.add('active');
         }
     </script>
 </body>
